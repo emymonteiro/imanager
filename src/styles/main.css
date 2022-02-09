@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+*{
+  font-family: 'Roboto', sans-serif;
+}
+
+input:not([type="submit"]){
+  transition: 0.5s;
+}
+
+.form{
+  @apply shadow-xl flex flex-col w-[500px] p-10 text-center space-y-10
+}
+
+.formTxt{
+  @apply text-gray-700 font-bold text-[1.5em] uppercase
+}
+
+.input{
+  @apply appearance-none rounded w-full max-w-[400px] outline-none py-3 border-b border-gray-300 text-gray-400 focus:border-gray-700 focus:text-gray-700
+}
+
+.submit{
+  @apply py-4 rounded text-light-600 bg-blue-600 cursor-pointer
+}

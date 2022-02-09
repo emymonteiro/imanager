@@ -26,8 +26,9 @@ export default createStore({
       try {
         await signInWithEmailAndPassword(auth, email, password)
       }catch(error){
+        console.log(error.code);
         switch(error.code){
-          case 'auth/user-not-fount':
+          case 'auth/user-not-found':
             alert("user not found")
             break
           case 'auth/wrong-password':

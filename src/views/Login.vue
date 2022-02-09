@@ -1,51 +1,20 @@
 <template>
     <main class="login">
-        <section class="forms">
-            <form class="register" @submit.prevent="register">
-                <h2>Registro</h2>
-                <input 
-                    type="email" 
-                    placeholder="Email"
-                    v-model="register_form.email" />
-                <input 
-                    type="password" 
-                    placeholder="Senha"
-                    v-model="register_form.password" />
-                <input 
-                    type="submit"
-                    value="Registro" />
-            </form>
-            <form class="login" @submit.prevent="login">
-                <h2>Login</h2>
-                <input 
-                    type="email" 
-                    placeholder="Email"
-                    v-model="login_form.email" />
-                <input 
-                    type="password" 
-                    placeholder="Senha"
-                    v-model="login_form.password" />
-                <input 
-                    type="submit"
-                    value="Registro" />
-            </form>
+        <section class="flex pt-30 justify-center items-center">
+            <LoginVue v-on:change="myHandler" v-if="page == 'login'"  />
+            <RegisterVue  v-on:change="myHandler" v-else />
         </section>
     </main>
 </template>
 
 <script setup>
+    import LoginVue from '../components/Login.vue';
+    import RegisterVue from '../components/Register.vue';
     import { ref } from 'vue';
-    import { useStore } from 'vuex';
 
-    const login_form = ref({})
-    const register_form = ref({})
-    const store = useStore();
+    const page = ref('login')
 
-    const login = () => {
-        store.dispatch('login', login_form.value);
+    const myHandler = () => {
+        page.value = page.value == 'login' ? 'register' : 'login'
     }
-    const register = () => {
-        store.dispatch('register', register_form.value);
-    }
-
 </script>
