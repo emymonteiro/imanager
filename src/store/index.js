@@ -1,11 +1,12 @@
 import { createStore } from 'vuex'
 import router from '../router'
-import { auth } from '../firebase'
+import { auth, db } from '../firebase'
 import { 
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword, 
   signOut 
 } from 'firebase/auth'
+import { collection } from 'firebase/firestore'
 
 export default createStore({
   state: {
@@ -29,13 +30,13 @@ export default createStore({
         console.log(error.code);
         switch(error.code){
           case 'auth/user-not-found':
-            alert("user not found")
+            alert("Usuário não encontrado")
             break
           case 'auth/wrong-password':
-            alert("Wrong password")
+            alert("Senha Incorreta")
             break
           default:
-            alert("something went wrong")
+            alert("Algo deu errado")
         }
 
         return
@@ -47,23 +48,26 @@ export default createStore({
       //
       const { email, password } = details
       try {
-        await createUserWithEmailAndPassword(auth, email, password)
+        const cred = await createUserWithEmailAndPassword(auth, email, password)
+        collection(db, 'users').doc(cred.user.uid).set({
+          
+        })
       }catch(error){
         switch(error.code){
           case 'auth/email-already-in-use':
-            alert("Email em uso")
+            alert("Esse email já está em uso")
             break
           case 'auth/invalid-email':
-            alert("invalid email")
+            alert("Email Inválido")
             break
           case 'auth/operation-not-allowed':
-            alert('Operation not allowed')
+            alert('Operação não permitida')
             break
           case 'auth/weak-password':
-            alert("Weak Password")
+            alert("Senha muito fraca")
             break
           default:
-            alert("something went wrong")
+            alert("Algo deu errado")
         }
 
         return

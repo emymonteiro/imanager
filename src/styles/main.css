@@ -23,3 +23,7 @@ input:not([type="submit"]){
 .submit{
   @apply py-4 rounded text-light-600 bg-blue-600 cursor-pointer
 }
+
+.menuButtons{
+  @apply py-5 px-5 w-full h-full hover:bg-red-600 cursor-pointer hover:font-bold
+}
